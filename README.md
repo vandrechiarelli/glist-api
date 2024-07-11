@@ -1,2 +1,2 @@
 # glist-api
-Grocery List App
+Grocery List Api

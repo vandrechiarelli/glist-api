@@ -4,25 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Setter
-public class ListName {
+public class User {
     @Id
     @SequenceGenerator(
-            name = "list_name_sequence",
-            sequenceName = "list_name_sequence",
+            name = "user_sequence",
+            sequenceName = "user_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "list_name_sequence"
+            generator = "user_sequence"
     )
-    private Long id;
+    private long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private LocalDateTime dateCreated = LocalDateTime.now();
+    private String email;
+    @Column(nullable = false)
+    private String password;
 }

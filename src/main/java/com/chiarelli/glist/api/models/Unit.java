@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table
 @Getter
 @Setter
 public class Unit {

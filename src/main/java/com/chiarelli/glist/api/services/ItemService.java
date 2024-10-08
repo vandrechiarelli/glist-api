@@ -3,6 +3,7 @@ package com.chiarelli.glist.api.services;
 import com.chiarelli.glist.api.models.Item;
 import com.chiarelli.glist.api.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ItemService {
     }
 
     public List<Item> getItems() {
-        return itemRepository.findAll();
+        return itemRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public Item getItem(Long id) {
@@ -30,8 +31,19 @@ public class ItemService {
         itemRepository.save(item);
     }
 
-    public void saveItem(Long id, Item item) {
-        item.setId(id);
-        itemRepository.save(item);
+    public Long saveItem(Long id, Item item) {
+        if (itemRepository.existsById(id)) {
+            item.setId(id);
+            itemRepository.save(item);
+        }
+        return item.getId();
+    }
+
+    public Long deleteItem(Long id) {
+        if (itemRepository.existsById(id)) {
+            itemRepository.deleteById(id);
+            return id;
+        }
+        return null;
     }
 }

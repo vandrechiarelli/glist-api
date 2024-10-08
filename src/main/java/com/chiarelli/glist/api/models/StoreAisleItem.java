@@ -44,7 +44,6 @@ import lombok.Setter;
                         @ColumnResult(name = "dueDays")}))
 
 @Entity
-@Table
 @Getter
 @Setter
 public class StoreAisleItem {

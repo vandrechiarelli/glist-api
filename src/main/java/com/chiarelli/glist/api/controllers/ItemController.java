@@ -3,6 +3,8 @@ package com.chiarelli.glist.api.controllers;
 import com.chiarelli.glist.api.models.Item;
 import com.chiarelli.glist.api.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,13 +20,14 @@ public class ItemController {
     }
 
     @GetMapping("v1/items")
-    public List<Item> getItems() {
-        return itemService.getItems();
+    public ResponseEntity<List<Item>> getItems() {
+        return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
     }
 
     @GetMapping("v1/item/{id}")
-    public Item getItem(@PathVariable Long id) {
-        return itemService.getItem(id);
+    public ResponseEntity<Item> getItem(@PathVariable Long id) {
+        Item item = itemService.getItem(id);
+        return new ResponseEntity<>(item, item != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("v1/item")
@@ -33,7 +36,14 @@ public class ItemController {
     }
 
     @PutMapping("v1/item/{id}")
-    public void saveItem(@PathVariable Long id, @RequestBody Item item) {
-        itemService.saveItem(id, item);
+    public ResponseEntity<Long> saveItem(@PathVariable Long id, @RequestBody Item item) {
+        Long existingId = itemService.saveItem(id, item);
+        return new ResponseEntity<>(existingId, existingId != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("v1/item/{id}")
+    public ResponseEntity<Long> deleteItem(@PathVariable Long id) {
+        Long existingId = itemService.deleteItem(id);
+        return new ResponseEntity<>(existingId, existingId != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
     }
 }

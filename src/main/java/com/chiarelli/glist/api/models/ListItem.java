@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
 @Getter
 @Setter
 public class ListItem {

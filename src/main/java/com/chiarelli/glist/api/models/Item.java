@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -28,6 +30,8 @@ public class Item {
     private Integer defaultQuantity;
     @Column(nullable = false)
     private Integer durationDays;
+    @Column(nullable = false)
+    private LocalDateTime lastPurchasedDate = LocalDateTime.now();
     private Long unitId;
     @ManyToOne
     @JoinColumn(name = "unitId", insertable = false, updatable = false)

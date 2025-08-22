@@ -1,5 +1,6 @@
 package com.chiarelli.glist.api.controllers;
 
+import com.chiarelli.glist.api.dtos.ListItemDTO;
 import com.chiarelli.glist.api.models.ListItem;
 import com.chiarelli.glist.api.services.ListItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,18 @@ public class ListItemController {
     }
 
     @GetMapping(path="v1/list_items")
-    public List<ListItem> getListItems() {
+    public List<ListItemDTO> getListItems() {
         return listItemService.getListItems();
     }
 
     @GetMapping(path="v1/list_item/{listId}")
-    public List<ListItem> getListItems(@PathVariable Long listId) {
+    public List<ListItemDTO> getListItems(@PathVariable Long listId) {
         return listItemService.getListItemsByListId(listId);
+    }
+
+    @GetMapping(path="v1/list_item/{listId}/available")
+    public List<ListItemDTO> getListAvailableItems(@PathVariable Long listId) {
+        return listItemService.getListAvailableItems(listId);
     }
 
     @GetMapping(path="v1/list_item/{listId}/{storeAisleItemId}")

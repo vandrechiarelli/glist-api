@@ -1,5 +1,7 @@
 package com.chiarelli.glist.api.services;
 
+import com.chiarelli.glist.api.dtos.ItemDTO;
+import com.chiarelli.glist.api.dtos.ListItemDTO;
 import com.chiarelli.glist.api.models.Item;
 import com.chiarelli.glist.api.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,11 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public List<Item> getItems() {
-        return itemRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+    public List<ItemDTO> getItems() {
+        return itemRepository.findAll(Sort.by(Sort.Direction.ASC, "name"))
+                .stream()
+                .map(ItemDTO::new)
+                .toList();
     }
 
     public Item getItem(Long id) {

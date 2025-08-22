@@ -1,5 +1,6 @@
 package com.chiarelli.glist.api.services;
 
+import com.chiarelli.glist.api.dtos.ListItemDTO;
 import com.chiarelli.glist.api.models.ListItem;
 import com.chiarelli.glist.api.models.ListItemId;
 import com.chiarelli.glist.api.repositories.ListItemRepository;
@@ -18,14 +19,20 @@ public class ListItemService {
         this.listItemRepository = listItemRepository;
     }
 
-    public List<ListItem> getListItems() {
-        return listItemRepository.findAll();
+    public List<ListItemDTO> getListItems() {
+        return listItemRepository.getListItems();
     }
 
-    public List<ListItem> getListItemsByListId(Long listId) {
+    public List<ListItemDTO> getListItemsByListId(Long listId) {
         ListItemId listItemId = new ListItemId();
         listItemId.setListId(listId);
-        return listItemRepository.findAllItemsByListId(listItemId.getListId());
+        return listItemRepository.getListItemsByListId(listItemId.getListId());
+    }
+
+    public List<ListItemDTO> getListAvailableItems(Long listId) {
+        ListItemId listItemId = new ListItemId();
+        listItemId.setListId(listId);
+        return listItemRepository.getListAvailableItems(listItemId.getListId());
     }
 
     public ListItem getListItem(Long listId, Long storeAisleItemId) {

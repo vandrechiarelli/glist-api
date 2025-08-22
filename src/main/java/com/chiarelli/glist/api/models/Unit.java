@@ -1,5 +1,6 @@
 package com.chiarelli.glist.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +26,6 @@ public class Unit {
     @Column(nullable = false)
     private String name;
     @OneToMany(mappedBy = "unit")
-    @JsonIgnoreProperties("unit")
+    @JsonIgnore
     private List<Item> item;
 }

@@ -7,12 +7,14 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class StoreAisleItemListDTO {
+public class ListItemDTO {
     private Long id;
-    private Long itemId;
-    private Long storeAisleId;
-    private String itemName;
+    private String name;
     private String translatedName;
-    private Long aisleId;
+    private Integer defaultQuantity;
+    private Integer durationDays;
+    private Long unitId;
+    private String unitName;
     private String aisleName;
+    private Integer isUrgent;
 }

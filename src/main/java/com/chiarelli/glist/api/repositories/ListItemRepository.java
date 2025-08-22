@@ -1,5 +1,6 @@
 package com.chiarelli.glist.api.repositories;
 
+import com.chiarelli.glist.api.dtos.ListItemDTO;
 import com.chiarelli.glist.api.models.ListItem;
 import com.chiarelli.glist.api.models.ListItemId;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,12 @@ import java.util.List;
 
 @Repository
 public interface ListItemRepository extends JpaRepository<ListItem, ListItemId> {
-    @Query("SELECT li FROM ListItem li WHERE li.id.listId = :listItemId")
-    List<ListItem> findAllItemsByListId(Long listItemId);
+    @Query(nativeQuery = true, name = "ListItem.getListItems")
+    List<ListItemDTO> getListItems();
+
+    @Query(nativeQuery = true, name = "ListItem.getListItemsByListId")
+    List<ListItemDTO> getListItemsByListId(Long listId);
+
+    @Query(nativeQuery = true, name = "ListItem.getListAvailableItems")
+    List<ListItemDTO> getListAvailableItems(Long listId);
 }

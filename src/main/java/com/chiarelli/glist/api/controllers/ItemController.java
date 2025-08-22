@@ -1,5 +1,6 @@
 package com.chiarelli.glist.api.controllers;
 
+import com.chiarelli.glist.api.dtos.ItemDTO;
 import com.chiarelli.glist.api.models.Item;
 import com.chiarelli.glist.api.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ItemController {
     }
 
     @GetMapping("v1/items")
-    public ResponseEntity<List<Item>> getItems() {
+    public ResponseEntity<List<ItemDTO>> getItems() {
         return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
     }
 

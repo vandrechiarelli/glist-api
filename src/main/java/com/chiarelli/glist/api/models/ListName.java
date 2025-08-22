@@ -25,4 +25,6 @@ public class ListName {
     private String name;
     @Column(nullable = false)
     private LocalDateTime dateCreated = LocalDateTime.now();
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
 }
